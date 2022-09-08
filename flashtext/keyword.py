@@ -42,13 +42,23 @@ class KeywordProcessor(object):
                 Defaults to False
         """
         self._keyword = '_keyword_'
-        self._white_space_chars = set(['.', '\t', '\n', '\a', ' ', ','])
+        self._white_space_chars = set(['.', '\t', '\n', '\a', ' ', ',','،'])
         try:
             # python 2.x
             self.non_word_boundaries = set(string.digits + string.letters + '_')
+            valid_persian_chars_set = ['ا', 'ب', 'پ', 'ت', 'ث', 'ج', 'چ', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'ژ', 'س', 'ش', 'ص', 'ض', 'ط',
+                       'ظ', 'ع', 'غ', 'ف', 'ق', 'ک', 'گ', 'ل', 'م', 'ن', 'و', 'ه', 'ی', '۰', '۱', '۲', '۳', '۴', '۵',
+                       '۶', '۷', '۸', '۹','آ']
+            self.non_word_boundaries.update(valid_persian_chars_set)
+
         except AttributeError:
             # python 3.x
             self.non_word_boundaries = set(string.digits + string.ascii_letters + '_')
+            valid_persian_chars_set = ['ا', 'ب', 'پ', 'ت', 'ث', 'ج', 'چ', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'ژ', 'س', 'ش', 'ص', 'ض', 'ط',
+                       'ظ', 'ع', 'غ', 'ف', 'ق', 'ک', 'گ', 'ل', 'م', 'ن', 'و', 'ه', 'ی', '۰', '۱', '۲', '۳', '۴', '۵',
+                       '۶', '۷', '۸', '۹','آ']
+            self.non_word_boundaries.update(valid_persian_chars_set)
+
         self.keyword_trie_dict = dict()
         self.case_sensitive = case_sensitive
         self._terms_in_trie = 0
